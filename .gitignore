@@ -1,0 +1,10 @@
+.vscode
+
+# Python virtual env
+.venv
+
+# Local testing file for using the data structures
+test.py
+
+# Test run caches
+**/__pycache__/**

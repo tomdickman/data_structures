@@ -35,6 +35,24 @@ class TestBinarySearchTree(unittest.TestCase):
         self.assertEqual(sut.root.left.left.value, 2)
         self.assertIsNone(sut.root.left.right)
 
+    def test_insert_greater_than_child(self):
+        sut = BinarySearchTree(70)
+        sut.insert(45).insert(50)
+
+        '''
+        Expected result
+
+                70
+              /
+             45
+               \
+               50
+
+        '''
+
+        self.assertEqual(sut.root.left.value, 45)
+        self.assertEqual(sut.root.left.right.value, 50)
+
     def test_contains(self):
         sut = (
             BinarySearchTree(33)
@@ -48,6 +66,50 @@ class TestBinarySearchTree(unittest.TestCase):
 
         self.assertTrue(sut.contains(28))
         self.assertFalse(sut.contains(31))
+
+    def test_delete_root(self):
+        sut = BinarySearchTree(27)
+        sut.delete(27)
+        self.assertIsNone(sut.root)
+        self.assertFalse(sut.contains(27))
+
+    def test_delete(self):
+        sut = (
+            BinarySearchTree(77)
+            .insert(21)
+            .insert(95)
+            .insert(14)
+            .insert(25)
+            .insert(88)
+            .insert(107)
+            .insert(22)
+            .insert(27)
+        )
+
+        '''
+        Before:
+                    77
+                  /    \
+                21      95
+               /  \    /  \
+              14  25  88  107
+                 /  \
+                22  27
+        After:
+                    77
+                  /    \
+                22      95
+               /  \    /  \
+              14  25  88  107
+                    \
+                    27
+        '''
+        sut.delete(21)
+
+        self.assertEqual(sut.root.left.value, 22)
+        self.assertEqual(sut.root.left.right.value, 25)
+        self.assertEqual(sut.root.left.right.right.value, 27)
+        self.assertIsNone(sut.root.left.right.left)
 
 if __name__ == "__main__":
     unittest.main()

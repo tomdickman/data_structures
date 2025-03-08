@@ -4,7 +4,7 @@
 .venv
 
 # Local testing file for using the data structures
-test.py
+debug.py
 
 # Test run caches
 **/__pycache__/**
